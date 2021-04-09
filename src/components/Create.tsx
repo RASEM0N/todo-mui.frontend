@@ -5,12 +5,18 @@ import {
     Typography,
     makeStyles,
     TextField,
+    Radio,
+    RadioGroup,
+    FormControlLabel,
+    FormLabel,
+    FormControl,
 } from '@material-ui/core'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
 
 // Typography:          https://material-ui.com/ru/components/typography/#typography
 // Button:              https://material-ui.com/ru/components/buttons/#button
 // TextFileds:          https://material-ui.com/ru/components/text-fields/#text-field
+// Radio Buttons:       https://material-ui.com/ru/components/radio-buttons/#standalone-radio-buttons
 
 // makeStyles [hook]:   https://material-ui.com/ru/styles/api/#makestyles-styles-options-hook
 
@@ -26,11 +32,14 @@ export const Create: React.FC = () => {
     const classes = useStyles()
     const [title, setTitle] = useState<string>('')
     const [details, setDetails] = useState<string>('')
+    const [category, setCategory] = useState<string>('todos')
 
     const [errorTitle, setErrorTitle] = useState<boolean>(false)
     const [errorDetails, setErrorDetails] = useState<boolean>(false)
 
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    ) => {
         const { name, value }: { name: string; value: string } = e.target
 
         switch (name) {
@@ -40,6 +49,10 @@ export const Create: React.FC = () => {
             }
             case 'details': {
                 setDetails(value)
+                return
+            }
+            case 'category': {
+                setCategory(value)
                 return
             }
             default:
@@ -55,7 +68,7 @@ export const Create: React.FC = () => {
         if (!details) setErrorDetails(true)
 
         if (details && title) {
-            console.log(title, details)
+            console.log(title, details, category)
         }
     }
 
@@ -94,6 +107,35 @@ export const Create: React.FC = () => {
                     required
                     error={errorDetails}
                 />
+                <FormControl className={classes.field}>
+                    <FormLabel>Note category</FormLabel>
+                    <RadioGroup
+                        value={category}
+                        name={'category'}
+                        onChange={handleChange}
+                    >
+                        <FormControlLabel
+                            value={'money'}
+                            control={<Radio />}
+                            label={'Money'}
+                        />
+                        <FormControlLabel
+                            value={'todos'}
+                            control={<Radio />}
+                            label={'Todos'}
+                        />
+                        <FormControlLabel
+                            value={'reminders'}
+                            control={<Radio />}
+                            label={'Reminders'}
+                        />
+                        <FormControlLabel
+                            value={'work'}
+                            control={<Radio />}
+                            label={'Work'}
+                        />
+                    </RadioGroup>
+                </FormControl>
                 <Button
                     type={'submit'}
                     color={'secondary'}
