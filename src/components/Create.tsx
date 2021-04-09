@@ -2,19 +2,11 @@ import React from 'react'
 import { Button, Container, Typography, makeStyles } from '@material-ui/core'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
 
-const useStyles = makeStyles({
-    btn: {
-        fontSize: 60,
-        backgroundColor: 'violet',
-        '&:hover': {
-            backgroundColor: 'blue',
-        },
-    },
-    title: {
-        textDecoration: 'underline',
-        marginBottom: 20,
-    },
-})
+// Typography:          https://material-ui.com/ru/components/typography/#typography
+// Button:              https://material-ui.com/ru/components/buttons/#button
+// makeStyles [hook]:   https://material-ui.com/ru/styles/api/#makestyles-styles-options-hook
+
+const useStyles = makeStyles({})
 
 export const Create: React.FC = () => {
     const classes = useStyles()
@@ -22,7 +14,6 @@ export const Create: React.FC = () => {
     return (
         <Container>
             <Typography
-                className={classes.title}
                 variant={'h6'}
                 gutterBottom
                 color={'textSecondary'}
@@ -31,9 +22,8 @@ export const Create: React.FC = () => {
                 Create a New Note
             </Typography>
             <Button
-                className={classes.btn}
                 type={'submit'}
-                color={'secondary'}
+                color={'primary'}
                 variant={'contained'}
                 onClick={() => console.log('You click med')}
                 endIcon={<KeyboardArrowRightIcon />}
