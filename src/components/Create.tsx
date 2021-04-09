@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ButtonGroup, Typography } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 
 export const Create: React.FC = () => {
     return (
@@ -12,17 +12,14 @@ export const Create: React.FC = () => {
             >
                 Create a New Note
             </Typography>
-            <Button type={'submit'} color={'default'}>
+            <Button
+                type={'submit'}
+                color={'secondary'}
+                variant={'contained'}
+                onClick={() => console.log('You click med')}
+            >
                 Submit
             </Button>
-            <Button type={'submit'} color={'secondary'} variant={'outlined'}>
-                Submit
-            </Button>
-            <ButtonGroup color={'secondary'} variant={'contained'}>
-                <Button>One</Button>
-                <Button>Two</Button>
-                <Button>Three</Button>
-            </ButtonGroup>
         </div>
     )
 }
