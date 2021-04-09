@@ -8,8 +8,6 @@ import { purple } from '@material-ui/core/colors'
 // ThemeProvider:       https://material-ui.com/ru/styles/api/#themeprovider
 // createMuiTheme:      https://material-ui.com/ru/customization/theming/#createmuitheme-options-args-theme
 
-// переопределяем дефолтные настройки
-// 'primary' - синий => - #fefefe (точно не синий)
 const theme = createMuiTheme({
     palette: {
         primary: {
