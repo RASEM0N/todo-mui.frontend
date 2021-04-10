@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Routes } from './components/routes'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 import { purple } from '@material-ui/core/colors'
+import Layout from './components/Layout'
 
 // Default Theme:       https://material-ui.com/ru/customization/default-theme/
 // ThemeProvider:       https://material-ui.com/ru/styles/api/#themeprovider
@@ -25,7 +26,9 @@ const App: React.FC = () => {
         // провайдер, как и с Context-ами
         <ThemeProvider theme={theme}>
             <BrowserRouter>
-                <Routes />
+                <Layout>
+                    <Routes />
+                </Layout>
             </BrowserRouter>
         </ThemeProvider>
     )
