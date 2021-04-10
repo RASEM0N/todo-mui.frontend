@@ -6,6 +6,7 @@ import {
     CardContent,
     IconButton,
     Typography,
+    makeStyles,
 } from '@material-ui/core'
 import { DeleteOutline } from '@material-ui/icons'
 
@@ -17,8 +18,28 @@ interface NoteExtra {
         id: number
     ) => void
 }
-
 type NoteProps = Note & NoteExtra
+
+const useStyles = makeStyles({
+    test: {
+        border: ({ category }: { category: string }) => {
+            switch (category) {
+                case 'money':
+                    return '1px solid #FF3333'
+                case 'todos':
+                    return '1px solid #33CC66'
+                case 'reminders': {
+                    return '1px solid #3366FF'
+                }
+                case 'work':
+                    return '1px solid #9933CC'
+                default:
+                    return undefined
+            }
+        },
+        margin: 20,
+    },
+})
 
 const NoteCard: React.FC<NoteProps> = ({
     title,
@@ -27,9 +48,11 @@ const NoteCard: React.FC<NoteProps> = ({
     id,
     handleDelete,
 }) => {
+    const classes = useStyles({ category })
+
     return (
         <div>
-            <Card elevation={1}>
+            <Card elevation={3} className={classes.test}>
                 <CardHeader
                     action={
                         <IconButton onClick={(e) => handleDelete(e, id)}>

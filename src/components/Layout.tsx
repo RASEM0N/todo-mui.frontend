@@ -14,10 +14,11 @@ import { useHistory, useLocation } from 'react-router-dom'
 // Drawer:              https://material-ui.com/ru/components/drawers/#drawer
 // Lists:               https://material-ui.com/ru/components/lists/#lists
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     page: {
         background: '#f9f9f9',
         width: '100%',
+        padding: theme.spacing(3),
     },
     drawer: {
         width: 240,
@@ -31,7 +32,10 @@ const useStyles = makeStyles({
     active: {
         background: '#f4f4f4',
     },
-})
+    title: {
+        padding: theme.spacing(2),
+    },
+}))
 
 interface LayoutProps {
     children: React.ReactElement
@@ -71,7 +75,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 }}
             >
                 <div>
-                    <Typography variant={'h5'}>Notes</Typography>
+                    <Typography variant={'h5'} className={classes.title}>
+                        Notes
+                    </Typography>
                 </div>
 
                 {/*list / links*/}
