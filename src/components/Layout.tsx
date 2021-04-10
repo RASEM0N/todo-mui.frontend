@@ -1,7 +1,18 @@
 import React from 'react'
-import { makeStyles, Drawer, Typography } from '@material-ui/core'
+import {
+    makeStyles,
+    Drawer,
+    Typography,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+} from '@material-ui/core'
+import { AddCircleOutline, SubjectOutlined } from '@material-ui/icons'
+import { useHistory, useLocation } from 'react-router-dom'
 
 // Drawer:              https://material-ui.com/ru/components/drawers/#drawer
+// Lists:               https://material-ui.com/ru/components/lists/#lists
 
 const useStyles = makeStyles({
     page: {
@@ -17,6 +28,9 @@ const useStyles = makeStyles({
     root: {
         display: 'flex',
     },
+    active: {
+        background: '#f4f4f4',
+    },
 })
 
 interface LayoutProps {
@@ -25,6 +39,24 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     const classes = useStyles()
+    const history = useHistory()
+    const location = useLocation()
+
+    const menuItem = [
+        {
+            text: 'My notes',
+            icon: <SubjectOutlined color={'action'} />,
+            path: '/',
+        },
+        {
+            text: 'Create Note',
+            icon: <AddCircleOutline color={'action'} />,
+            path: '/create',
+        },
+    ]
+
+    const handleClick = (path: string) => history.push(path)
+
     return (
         <div className={classes.root}>
             {/*app bar*/}
@@ -41,6 +73,28 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <div>
                     <Typography variant={'h5'}>Notes</Typography>
                 </div>
+
+                {/*list / links*/}
+
+                <List>
+                    {menuItem.map((item) => {
+                        return (
+                            <ListItem
+                                key={item.text}
+                                button
+                                onClick={() => handleClick(item.path)}
+                                className={
+                                    location.pathname === item.path
+                                        ? classes.active
+                                        : undefined
+                                }
+                            >
+                                <ListItemIcon>{item.icon}</ListItemIcon>
+                                <ListItemText primary={item.text} />
+                            </ListItem>
+                        )
+                    })}
+                </List>
             </Drawer>
 
             <div className={classes.page}>{children}</div>
