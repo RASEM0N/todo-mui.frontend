@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
 import useFetch from './hooks/useFetch'
+import { Container, Paper, Grid } from '@material-ui/core'
 
 // Grid:            https://material-ui.com/ru/components/grid/#grid
 
@@ -21,25 +20,16 @@ export const Notes: React.FC = () => {
     }, [doFetch])
 
     return (
-        <div>
+        <Container>
             <Grid container>
-                <Grid md={3} sm={6} xs={12} item>
-                    <Paper>1</Paper>
-                </Grid>
-                <Grid md={3} sm={6} xs={12} item>
-                    <Paper>2</Paper>
-                </Grid>
-                <Grid md={3} sm={6} xs={12} item>
-                    <Paper>3</Paper>
-                </Grid>
-                <Grid md={3} sm={6} xs={12} item>
-                    <Paper>4</Paper>
-                </Grid>
+                {!loading &&
+                    response &&
+                    response.map((item) => (
+                        <Grid key={item.id} xs={12} md={6} lg={4}>
+                            <Paper>{item.title}</Paper>
+                        </Grid>
+                    ))}
             </Grid>
-
-            {!loading &&
-                response &&
-                response.map((item) => <p key={item.id}>{item.title}</p>)}
-        </div>
+        </Container>
     )
 }
