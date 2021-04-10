@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import useFetch from './hooks/useFetch'
 import { Container, Grid } from '@material-ui/core'
 import NoteCard from './NoteCard'
+import Masonry from 'react-masonry-css'
 
 // Grid:            https://material-ui.com/ru/components/grid/#grid
+// Masonry:         https://github.com/paulcollett/react-masonry-css
 
 export interface Note {
     title: string
@@ -21,7 +23,7 @@ export const Notes: React.FC = () => {
     const loading = deleteF.loading
 
     useEffect(() => {
-        if (!loading) getFetch()
+        if (loading === null) getFetch()
     }, [getFetch, loading])
 
     const handleDelete = (
@@ -38,11 +40,15 @@ export const Notes: React.FC = () => {
 
     return (
         <Container>
-            <Grid container spacing={3}>
+            <Masonry
+                breakpointCols={3}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column"
+            >
                 {!getF.loading &&
                     getF.response &&
                     getF.response.map((item) => (
-                        <Grid key={item.id} xs={12} md={6} lg={4}>
+                        <Grid key={item.id}>
                             <NoteCard
                                 title={item.title}
                                 details={item.details}
@@ -52,7 +58,7 @@ export const Notes: React.FC = () => {
                             />
                         </Grid>
                     ))}
-            </Grid>
+            </Masonry>
         </Container>
     )
 }
