@@ -7,6 +7,7 @@ import {
     IconButton,
     Typography,
     makeStyles,
+    Avatar,
 } from '@material-ui/core'
 import { DeleteOutline } from '@material-ui/icons'
 
@@ -75,6 +76,13 @@ const NoteCard: React.FC<NoteProps> = ({
         <div>
             <Card elevation={3} className={classes.test}>
                 <CardHeader
+                    avatar={
+                        <Avatar
+                            src={
+                                'https://data.whicdn.com/images/290802929/original.jpg'
+                            }
+                        />
+                    }
                     action={
                         <IconButton onClick={(e) => handleDelete(e, id)}>
                             <DeleteOutline />

@@ -9,6 +9,7 @@ import {
     ListItemText,
     Toolbar,
     AppBar,
+    Avatar,
 } from '@material-ui/core'
 import { AddCircleOutline, SubjectOutlined } from '@material-ui/icons'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -47,6 +48,12 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
     },
+    justdiv: {
+        display: 'flex',
+    },
+    avatar: {
+        marginLeft: 20,
+    },
 }))
 
 interface LayoutProps {
@@ -78,13 +85,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             {/*app bar*/}
             <AppBar className={classes.appbar} elevation={0}>
                 <Toolbar className={classes.tlbr}>
-                    <Typography variant={'h6'}>
-                        Welcome to notes website {/*user*/}
-                        Roman
-                    </Typography>
                     <Typography variant={'body2'} color={'textSecondary'}>
-                        {format(new Date(), 'dd-MM-yyyy ')}
+                        {format(new Date(), 'dd-MM-yyyy')}
                     </Typography>
+                    <div className={classes.justdiv}>
+                        <Typography variant={'h6'}>
+                            {/*user*/}
+                            RASEM0n
+                        </Typography>
+                        <Avatar
+                            src={
+                                'https://data.whicdn.com/images/290802929/original.jpg'
+                            }
+                            className={classes.avatar}
+                        />
+                    </div>
                 </Toolbar>
             </AppBar>
 
