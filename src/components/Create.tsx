@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import {
     Button,
     Container,
@@ -12,6 +13,8 @@ import {
     FormControl,
 } from '@material-ui/core'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
+import useFetch from './hooks/useFetch'
+import { Note } from './Notes'
 
 // Typography:          https://material-ui.com/ru/components/typography/#typography
 // Button:              https://material-ui.com/ru/components/buttons/#button
@@ -37,6 +40,8 @@ export const Create: React.FC = () => {
     const [errorTitle, setErrorTitle] = useState<boolean>(false)
     const [errorDetails, setErrorDetails] = useState<boolean>(false)
 
+    const { doFetch, loading } = useFetch<Note>('/notes')
+
     const handleChange = (
         e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
     ) => {
@@ -61,6 +66,7 @@ export const Create: React.FC = () => {
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
         setErrorDetails(false)
         setErrorTitle(false)
 
@@ -68,9 +74,18 @@ export const Create: React.FC = () => {
         if (!details) setErrorDetails(true)
 
         if (details && title) {
-            console.log(title, details, category)
+            doFetch({
+                method: 'POST',
+                data: {
+                    title,
+                    details,
+                    category,
+                },
+            })
         }
     }
+
+    if (loading === false) return <Redirect to="/" />
 
     return (
         <Container>
