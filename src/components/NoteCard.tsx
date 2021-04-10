@@ -38,6 +38,27 @@ const useStyles = makeStyles({
             }
         },
         margin: 20,
+        boxShadow: 'none',
+        '&:hover': {
+            boxShadow: ({ category }: { category: string }) => {
+                const giveMeShadod = (color: string) =>
+                    `0px 0px 12px 0px ${color}, 0px 3px 4px 0px ${color}`
+
+                switch (category) {
+                    case 'money':
+                        return giveMeShadod('#FF3333')
+                    case 'todos':
+                        return giveMeShadod('#33CC66')
+                    case 'reminders': {
+                        return giveMeShadod('#3366FF')
+                    }
+                    case 'work':
+                        return giveMeShadod('#9933CC')
+                    default:
+                        return undefined
+                }
+            },
+        },
     },
 })
 

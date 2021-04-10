@@ -7,12 +7,16 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
+    Toolbar,
+    AppBar,
 } from '@material-ui/core'
 import { AddCircleOutline, SubjectOutlined } from '@material-ui/icons'
 import { useHistory, useLocation } from 'react-router-dom'
+import { format } from 'date-fns'
 
 // Drawer:              https://material-ui.com/ru/components/drawers/#drawer
 // Lists:               https://material-ui.com/ru/components/lists/#lists
+// AppBar:              https://material-ui.com/components/app-bar/
 
 const useStyles = makeStyles((theme) => ({
     page: {
@@ -34,6 +38,14 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         padding: theme.spacing(2),
+    },
+    appbar: {
+        width: `calc(100% - 240px)`,
+    },
+    toolbar: theme.mixins.toolbar,
+    tlbr: {
+        display: 'flex',
+        justifyContent: 'space-between',
     },
 }))
 
@@ -64,6 +76,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <div className={classes.root}>
             {/*app bar*/}
+            <AppBar className={classes.appbar} elevation={0}>
+                <Toolbar className={classes.tlbr}>
+                    <Typography variant={'h6'}>
+                        Welcome to notes website {/*user*/}
+                        Roman
+                    </Typography>
+                    <Typography variant={'body2'} color={'textSecondary'}>
+                        {format(new Date(), 'dd-MM-yyyy ')}
+                    </Typography>
+                </Toolbar>
+            </AppBar>
 
             {/*side bar*/}
             <Drawer
@@ -103,7 +126,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </List>
             </Drawer>
 
-            <div className={classes.page}>{children}</div>
+            <div className={classes.page}>
+                <div className={classes.toolbar} />
+                {children}
+            </div>
         </div>
     )
 }
