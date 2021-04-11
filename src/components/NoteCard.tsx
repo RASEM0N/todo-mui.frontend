@@ -38,7 +38,7 @@ const useStyles = makeStyles({
                     return undefined
             }
         },
-        margin: 20,
+        width: '100%',
         boxShadow: 'none',
         '&:hover': {
             boxShadow: ({ category }: { category: string }) => {
@@ -60,6 +60,12 @@ const useStyles = makeStyles({
                 }
             },
         },
+    },
+    details: {
+        maxHeight: 400,
+        overflowY: 'auto',
+        textAlign: 'justify',
+        paddingRight: 10,
     },
 })
 
@@ -92,7 +98,11 @@ const NoteCard: React.FC<NoteProps> = ({
                     subheader={category}
                 />
                 <CardContent>
-                    <Typography variant={'body2'} color={'textSecondary'}>
+                    <Typography
+                        variant={'body2'}
+                        color={'textSecondary'}
+                        className={classes.details}
+                    >
                         {details}
                     </Typography>
                 </CardContent>
